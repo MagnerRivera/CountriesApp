@@ -1,0 +1,42 @@
+# IDE specific files
+.idea/
+*.iml
+
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+
+# Compiled output
+/out/
+
+# Gradle files
+.gradle/
+build/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Thumbnails
+Thumbs.db
+
+# Exclude ProGuard files
+proguard-rules.pro
+
+# Exclude .git files and folders
+.gitignore
+.gitattributes
+.git/
