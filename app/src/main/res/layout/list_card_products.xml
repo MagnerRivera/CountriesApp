@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/black"
+    app:cardCornerRadius="@dimen/space_small"
+    app:cardUseCompatPadding="true">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        app:cardCornerRadius="@dimen/space_small">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivCountry"
+                android:layout_width="@dimen/layout_width_large"
+                android:layout_height="@dimen/layout_height_large"
+                android:layout_gravity="center"
+                android:background="@drawable/circle_background"
+                android:contentDescription="@string/country_image"
+                android:padding="4dp"
+                android:layout_marginTop="@dimen/space_small"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvCountry" />
+
+            <TextView
+                android:id="@+id/tvCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/space_small"
+                android:gravity="center"
+                android:text="@string/country"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_medium_large"
+                app:layout_constraintStart_toStartOf="@id/ivCountry"
+                app:layout_constraintEnd_toEndOf="@id/ivCountry"
+                app:layout_constraintTop_toBottomOf="@id/ivCountry" />
+
+            <TextView
+                android:id="@+id/tvCapital"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/space_small"
+                android:gravity="center"
+                android:text="@string/capital"
+                android:textColor="@color/text_id"
+                android:textSize="@dimen/text_small"
+                app:layout_constraintStart_toStartOf="@id/ivCountry"
+                app:layout_constraintEnd_toEndOf="@id/ivCountry"
+                app:layout_constraintTop_toBottomOf="@id/tvCountry" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.cardview.widget.CardView>

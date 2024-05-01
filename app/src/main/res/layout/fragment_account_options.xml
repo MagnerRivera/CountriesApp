@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvAppName"
+            style="@style/TextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_large"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:text="@string/app_name"
+            android:textSize="@dimen/text_medium_large"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_shape"
+            app:layout_constraintStart_toStartOf="@+id/guidelineOptionsLeft"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvRightAddressForCountries"
+            style="@style/TextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_medium_large"
+            android:gravity="center"
+            android:paddingStart="@dimen/paddingStart"
+            android:paddingEnd="@dimen/paddingEnd"
+            android:text="@string/rightAddress"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/guidelineOptionsRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineOptionsLeft"
+            app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+
+        <TextView
+            android:id="@+id/tvQuality"
+            style="@style/TextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_medium"
+            android:gravity="center"
+            android:paddingStart="@dimen/paddingStart"
+            android:paddingEnd="@dimen/paddingEnd"
+            android:text="@string/qulity"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_medium_large"
+            app:layout_constraintEnd_toEndOf="@id/guidelineOptionsRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineOptionsLeft"
+            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForCountries" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonRegisterAccountOptions"
+            style="@style/yellowButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/mediumButtonHeight"
+            android:text="@string/register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineOptionsRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineOptionsLeft"
+            app:layout_constraintTop_toBottomOf="@id/tvQuality"
+            app:layout_constraintVertical_bias="0.200" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonLoginAccountOptions"
+            style="@style/yellowButtonStyleDiffuminado"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/mediumButtonHeight"
+            android:layout_marginTop="@dimen/space_small"
+            android:text="@string/login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineOptionsRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineOptionsLeft"
+            app:layout_constraintTop_toBottomOf="@+id/buttonRegisterAccountOptions"
+            app:layout_constraintVertical_bias="0.200" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/layout_width"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="@dimen/space_medium_large"
+            android:background="@drawable/ic_logo"
+            android:contentDescription="@string/image_logo"
+            app:layout_constraintEnd_toEndOf="@id/buttonLoginAccountOptions"
+            app:layout_constraintStart_toStartOf="@id/buttonLoginAccountOptions"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLoginAccountOptions" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineOptionsLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.09" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineOptionsRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

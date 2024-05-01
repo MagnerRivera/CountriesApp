@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">CountriesApp</string>
+    <string name="home">Home</string>
+    <string name="profile">Perfil</string>
+    <string name="rightAddress">La mejor aplicación para visualizar sus países.</string>
+    <string name="qulity">¡Ahora es muy fácil alcanzar la mejor calidad de visualización de tus países en la palma de tu mano!</string>
+    <string name="register">Registrar</string>
+    <string name="login">Login</string>
+    <string name="start">Comencemos</string>
+    <string name="goLogin">¡Vamos a ingresar!</string>
+    <string name="goNotAcount">¿No tienes una cuenta? Registro</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="goRegister">¡Vamos a registrarnos!</string>
+    <string name="haveAcount">¿Ya tienes una cuenta? ingresar</string>
+    <string name="name">Digite su nombre completo</string>
+    <string name="number_version">version 1.0</string>
+    <string name="regional">Regional</string>
+    <string name="settings">Ajustes</string>
+    <string name="logout">Salir</string>
+    <string name="digit_email">Digite su correo electronico</string>
+    <string name="countries">Paises</string>
+    <string name="name_country">Nombre del país</string>
+    <string name="search_countries">Buscar Países</string>
+    <string name="empty_title">No hay países en la base de datos</string>
+    <string name="image_logo">Imagen del logo</string>
+    <string name="introduction_image">Imagen de la intraducción</string>
+    <string name="back_image">Imagen para el back</string>
+    <string name="image_logout">Imagen para el logout</string>
+    <string name="exit_image">Imagen exit</string>
+    <string name="arrow_image">Imagen para el arrow</string>
+    <string name="country_image">Imagen bandera</string>
+    <string name="capital">Capital</string>
+    <string name="country">País</string>
 </resources>
