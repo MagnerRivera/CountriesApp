@@ -14,24 +14,23 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.FileOutputStream
+import java.util.Locale
 
 class CountriesAdapter(private var countries: List<Any>) :
     RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>(), Filterable {
 
     private var filteredCountries: List<Any> = countries
+    private var onCountryClickListener: OnCountryClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
-        val binding = ListCardProductsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListCardProductsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CountryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
         val country = filteredCountries[position]
-        if (country is Country) {
-            holder.bindCountry(country)
-        } else if (country is CountryEntity) {
-            holder.bindCountryEntity(country)
-        }
+        holder.bind(country)
     }
 
     override fun getItemCount(): Int = filteredCountries.size
@@ -39,15 +38,33 @@ class CountriesAdapter(private var countries: List<Any>) :
     inner class CountryViewHolder(private val binding: ListCardProductsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindCountry(country: Country) {
-            // Utilizo las llamadas seguras para evitar NullPointerException
-            binding.tvCountry.text = country.name?.common ?: "Unknown"
-            binding.tvCapital.text = country.capital?.firstOrNull() ?: "Unknown"
-            // Cargo la imagen usando Picasso
-            Picasso.get().load(country.flags?.png).into(binding.ivCountry)
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val country = filteredCountries[position]
+                    onCountryClickListener?.onCountryClicked(country)
+                }
+            }
         }
 
-        fun bindCountryEntity(countryEntity: CountryEntity) {
+        fun bind(country: Any) {
+            if (country is Country) {
+                bindCountry(country)
+            } else if (country is CountryEntity) {
+                bindCountryEntity(country)
+            }
+        }
+
+        private fun bindCountry(country: Country) {
+            // Utilizo las llamadas seguras para evitar NullPointerException
+            binding.tvCountry.text = country.name.common
+            binding.tvCapital.text = country.capital.firstOrNull() ?: "Unknown"
+            // Cargo la imagen usando Picasso
+            Picasso.get().load(country.flags.png).into(binding.ivCountry)
+        }
+
+        private fun bindCountryEntity(countryEntity: CountryEntity) {
             binding.tvCountry.text = countryEntity.name
             binding.tvCapital.text = countryEntity.capital
 
@@ -91,11 +108,27 @@ class CountriesAdapter(private var countries: List<Any>) :
                 } else {
                     val filteredList = mutableListOf<Any>()
                     for (country in countries) {
-                        if (country is Country && (country.name?.common?.toLowerCase()?.contains(charString.toLowerCase()) == true ||
-                                    country.capital?.firstOrNull()?.toLowerCase()?.contains(charString.toLowerCase()) == true)) {
+                        if (country is Country && (country.name.common.lowercase(Locale.ROOT)
+                                .contains(
+                                    charString.lowercase(
+                                        Locale.ROOT
+                                    )
+                                ) || country.capital.firstOrNull()?.lowercase(Locale.ROOT)
+                                ?.contains(
+                                    charString.lowercase(Locale.ROOT)
+                                ) == true)
+                        ) {
                             filteredList.add(country)
-                        } else if (country is CountryEntity && (country.name.toLowerCase().contains(charString.toLowerCase()) ||
-                                    country.capital.toLowerCase().contains(charString.toLowerCase()))) {
+                        } else if (country is CountryEntity && (country.name.lowercase(Locale.ROOT)
+                                .contains(
+                                    charString.lowercase(Locale.ROOT)
+                                ) ||
+                                    country.capital.lowercase(Locale.ROOT).contains(
+                                        charString.lowercase(
+                                            Locale.ROOT
+                                        )
+                                    ))
+                        ) {
                             filteredList.add(country)
                         }
                     }
@@ -111,5 +144,25 @@ class CountriesAdapter(private var countries: List<Any>) :
                 notifyDataSetChanged()
             }
         }
+    }
+
+    fun setOnCountryClickListener(listener: OnCountryClickListener) {
+        this.onCountryClickListener = listener
+    }
+
+    //Metodo para organizar el recycler de forma alfabetica
+    fun sortByName() {
+        filteredCountries = filteredCountries.sortedBy {
+            when (it) {
+                is Country -> it.name.common
+                is CountryEntity -> it.name
+                else -> ""
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+    interface OnCountryClickListener {
+        fun onCountryClicked(country: Any)
     }
 }

@@ -39,15 +39,26 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sortButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/sort_image"
+            android:src="@drawable/ic_order"
+            app:backgroundTint="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuideLine"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarCountries" />
+
         <LinearLayout
             android:id="@+id/searchLayout"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="@dimen/space_medium"
-            android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/sortButton"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
             app:layout_constraintTop_toBottomOf="@id/toolbarCountries">
 
             <ImageView
@@ -90,33 +101,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchLayout" />
-
-
-        <ImageView
-            android:id="@+id/imageEmpty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_empty"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/rvCountries"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchLayout"
-            app:layout_constraintVertical_bias="0.1" />
-
-        <TextView
-            android:id="@+id/emptyPhotos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/empty_title"
-            android:textColor="@color/text_normal"
-            android:textSize="@dimen/text_medium_large"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/rightGuideLine"
-            app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-            app:layout_constraintTop_toBottomOf="@+id/imageEmpty" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/rightGuideLine"

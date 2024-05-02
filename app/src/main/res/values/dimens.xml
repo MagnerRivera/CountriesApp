@@ -15,10 +15,12 @@
     <dimen name="dimen_layout_width">30dp</dimen>
     <dimen name="dimen_layout_height">30dp</dimen>
     <dimen name="dimen_layout_height_button">60dp</dimen>
+    <dimen name="dimen_layout_width_button">60dp</dimen>
     <dimen name="paddingStart">20dp</dimen>
     <dimen name="paddingEnd">20dp</dimen>
     <dimen name="layout_width">100dp</dimen>
     <dimen name="layout_height">100dp</dimen>
     <dimen name="layout_width_large">200dp</dimen>
     <dimen name="layout_height_large">200dp</dimen>
+    <dimen name="layout_marginStart">10dp</dimen>
 </resources>

@@ -1,10 +1,10 @@
 package com.example.countriesapp.retrofit
 
-import com.example.countriesapp.utils.Constans
+import com.example.countriesapp.utils.Constants
 import retrofit2.Call
 import retrofit2.http.GET
 
 interface CountryService {
-    @GET(Constans.GET)
+    @GET(Constants.GET)
     fun getAllCountries(): Call<List<Country>>
 }

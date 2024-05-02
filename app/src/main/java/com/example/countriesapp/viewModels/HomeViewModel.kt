@@ -47,4 +47,9 @@ class HomeViewModel @Inject constructor(private val countryDao: CountryDao) : Vi
     fun getCountriesFromDatabase(): LiveData<List<CountryEntity>> {
         return countryDao.getAllCountries()
     }
+
+    fun getCountryByCode(cca3: String): LiveData<CountryEntity> {
+        return countryDao.getCountryByCode(cca3)
+    }
+
 }

@@ -32,4 +32,25 @@
     <string name="country_image">Imagen bandera</string>
     <string name="capital">Capital</string>
     <string name="country">País</string>
+    <string name="map_image">Imagen mapa</string>
+    <string name="country_detail">Detalle del país</string>
+    <string name="country_name">Nombre del país</string>
+    <string name="cca3">Código del país</string>
+    <string name="code">MDA</string>
+    <string name="population_number">Número población</string>
+    <string name="number_population">31255435</string>
+    <string name="population_status">Estado de población</string>
+    <string name="state">officially-assigned</string>
+    <string name="region">Región</string>
+    <string name="region_name">Oceania</string>
+    <string name="name_region">imagen región</string>
+    <string name="sub_region">Sub Región</string>
+    <string name="sub_region_name">Micronesia</string>
+    <string name="startOfWeek">Día de inicio semana</string>
+    <string name="start_of_week_name">monday</string>
+    <string name="continentes">Continentes</string>
+    <string name="borders">Países cercanos</string>
+    <string name="sort_image">imagen para ordenar</string>
+    <string name="order">Ordenar alfabeticamente</string>
+    <string name="empty_borders">No cuenta con paises limitantes</string>
 </resources>

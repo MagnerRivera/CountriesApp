@@ -21,8 +21,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-
-
+    <style name="h3">
+        <item name="android:fontFamily">@font/poppins_light</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/h3TextSize</item>
+    </style>
 
     <!--Dimen for styles-->
     <dimen name="h4TextSize">35sp</dimen>

@@ -19,6 +19,14 @@ interface UserDao {
 interface CountryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertCountry(country: List<CountryEntity>)
+
     @Query("SELECT * FROM countries")
     fun getAllCountries(): LiveData<List<CountryEntity>>
+
+    @Query("SELECT * FROM countries WHERE cca3 = :cca3")
+    fun getCountryByCode(cca3: String): LiveData<CountryEntity>
+
+    @Query("SELECT * FROM countries WHERE cca3 IN (:codes)")
+    suspend fun getCountriesByCodes(codes: List<String>): List<CountryEntity>
+
 }

@@ -1,11 +1,11 @@
 package com.example.countriesapp.retrofit
 
-import com.example.countriesapp.utils.Constans
+import com.example.countriesapp.utils.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object CountriesInstance {
-    private const val BASE_URL = Constans.BASE_URL
+    private const val BASE_URL = Constants.BASE_URL
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()

@@ -11,16 +11,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.countriesapp.R
 import com.example.countriesapp.adapter.CountriesAdapter
 import com.example.countriesapp.animaionUtils.AnimationUtils
 import com.example.countriesapp.databinding.FragmentHomeBinding
 import com.example.countriesapp.retrofit.CountriesInstance
 import com.example.countriesapp.retrofit.Country
+import com.example.countriesapp.room.CountryEntity
 import com.example.countriesapp.viewModels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
@@ -30,7 +31,7 @@ import retrofit2.Response
 private const val TAG = "HomeFragment"
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), CountriesAdapter.OnCountryClickListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var editTextSearch: EditText
@@ -50,12 +51,16 @@ class HomeFragment : Fragment() {
         progressBar = binding.progressBar
         editTextSearch = binding.editTextSearch
 
+        // Obtengo los países desde la base de datos
+        getCountriesFromDatabase()
+
+        binding.sortButton.setOnClickListener {
+            (binding.rvCountries.adapter as? CountriesAdapter)?.sortByName()
+        }
+
         if (isNetworkAvailable(requireContext())) {
-            // Si hay conexión a Internet, cargar datos desde el servicio
+            // Si hay conexión a Internet, cargo los datos desde el servicio
             getAllCountries()
-        } else {
-            // Si no hay conexión a Internet, cargar datos desde la base de datos
-            getCountriesFromDatabase()
         }
     }
 
@@ -75,7 +80,7 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     val countries = response.body()
                     countries?.let {
-                        // Guardar los países en el ViewModel
+                        // Guardo los países en el ViewModel
                         viewModel.saveCountries(it)
                     }
                 } else {
@@ -89,42 +94,57 @@ class HomeFragment : Fragment() {
                 progressBar.visibility = View.INVISIBLE
             }
         })
+    }
 
-        // Observar el LiveData para actualizar la UI cuando los datos cambien
-        viewModel.countriesLiveData.observe(viewLifecycleOwner) { countries ->
-            progressBar.visibility = View.INVISIBLE
-
-            val adapter = CountriesAdapter(countries)
-            binding.rvCountries.adapter = adapter
-            binding.rvCountries.apply {
-                layoutManager = GridLayoutManager(requireContext(), 2)
+    override fun onCountryClicked(country: Any) {
+        if (country is CountryEntity) {
+            viewModel.getCountryByCode(country.cca3).observe(viewLifecycleOwner) { countryEntity ->
+                Log.d(TAG, "Country details: $countryEntity")
+                val bundle = Bundle().apply {
+                    putString("cca3", countryEntity.cca3)
+                    putString("name", countryEntity.name)
+                    putInt("population", countryEntity.population)
+                    putString("status", countryEntity.status)
+                    putString("capital", countryEntity.capital)
+                    putString("region", countryEntity.region)
+                    putString("subregion", countryEntity.subregion)
+                    putString("flags", countryEntity.flags)
+                    putString("startOfWeek", countryEntity.startOfWeek)
+                    putStringArrayList("continents", ArrayList(countryEntity.continents))
+                    putStringArrayList("borders", ArrayList(countryEntity.borders))
+                }
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_detailCountryFragment,
+                    bundle
+                )
             }
-            //metodo para el filter
-            setupSearchFunctionality(adapter)
+        } else {
+            Log.e(TAG, "Invalid country type: $country")
         }
     }
 
+
     private fun getCountriesFromDatabase() {
-        // Obtener los países desde la base de datos
-        viewModel.getCountriesFromDatabase().observe(viewLifecycleOwner, Observer { countries ->
+        // Obtengo los países desde la base de datos
+        viewModel.getCountriesFromDatabase().observe(viewLifecycleOwner) { countries ->
             if (countries.isNotEmpty()) {
-                // Si hay datos en la base de datos, mostrarlos en la UI
+                // Si hay datos en la base de datos, lo muestro en la UI
                 val adapter = CountriesAdapter(countries)
                 binding.rvCountries.adapter = adapter
                 binding.rvCountries.layoutManager = GridLayoutManager(requireContext(), 2)
 
+                // Configuro el clic en el adaptador
+                adapter.setOnCountryClickListener(this@HomeFragment)
+
                 //metodo para el filter
                 setupSearchFunctionality(adapter)
-
+                // Ocultar el ProgressBar
+                progressBar.visibility = View.INVISIBLE
             } else {
-                Toast.makeText(requireContext(), "No hay datos en la bd.", Toast.LENGTH_SHORT).show()
-                Log.e(TAG, "No countries found in database")
-                setupSearchFunctionality(CountriesAdapter(emptyList()))
-                binding.searchLayout.visibility = View.INVISIBLE
-                binding.imageEmpty.visibility = View.VISIBLE
-                binding.emptyPhotos.visibility = View.VISIBLE
+                // No hay datos en la base de datos, obtengo los países del servicio
+                getAllCountries()
             }
-        })
+        }
     }
 
     private fun setupSearchFunctionality(adapter: CountriesAdapter) {
@@ -148,8 +168,6 @@ class HomeFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 adapter.filter.filter(s)
-                binding.imageEmpty.visibility = View.INVISIBLE
-                binding.emptyPhotos.visibility = View.INVISIBLE
             }
 
             override fun afterTextChanged(s: Editable?) {

@@ -9,11 +9,20 @@
         android:id="@+id/homeFragment"
         android:name="com.example.countriesapp.fragments.options.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailCountryFragment"
+            app:destination="@id/detailCountryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.countriesapp.fragments.options.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/detailCountryFragment"
+        android:name="com.example.countriesapp.fragments.options.DetailCountryFragment"
+        android:label="DetailCountryFragment"
+        tools:layout="@layout/fragment_detail_country"/>
 </navigation>
