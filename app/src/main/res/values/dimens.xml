@@ -3,7 +3,7 @@
 
     <dimen name="mediumButtonHeight">55dp</dimen>
     <dimen name="edittextHeight">60dp</dimen>
-    <dimen name="space_small">10dp</dimen>
+    <dimen name="space_small">20dp</dimen>
     <dimen name="space_medium">15dp</dimen>
     <dimen name="space_medium_large">25dp</dimen>
     <dimen name="space_large">50dp</dimen>

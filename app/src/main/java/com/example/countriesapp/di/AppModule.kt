@@ -3,6 +3,7 @@ package com.example.countriesapp.di
 import android.app.Application
 import androidx.room.Room
 import com.example.countriesapp.room.CountriesAppDatabase
+import com.example.countriesapp.room.CountryDao
 import com.example.countriesapp.room.UserDao
 import dagger.Module
 import dagger.Provides
@@ -31,5 +32,10 @@ object AppModule {
     @Singleton
     fun provideUserDao(appDatabase: CountriesAppDatabase): UserDao {
         return appDatabase.userDao()
+    }
+
+    @Provides
+    fun provideCountryDao(database: CountriesAppDatabase): CountryDao {
+        return database.countryDao()
     }
 }
