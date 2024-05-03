@@ -18,6 +18,7 @@ import com.example.countriesapp.viewModels.DetailCountryViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 
 private const val TAG = "DetailCountryFragment"
 
@@ -53,7 +54,6 @@ class DetailCountryFragment : Fragment() {
             binding.nameCountry.text = name
             binding.capital.text = capital.toString()
             binding.numberCode.text = cca3.toString()
-            binding.numberPopulation.text = population.toString()
             binding.stateName.text = status.toString()
             binding.regionName.text = region.toString()
             binding.subRegionName.text = subregion.toString()
@@ -69,6 +69,9 @@ class DetailCountryFragment : Fragment() {
             } else {
                 binding.imageDetail.setImageResource(R.drawable.ic_country)
             }
+
+            // Formateo la población antes de mostrarla
+            binding.numberPopulation.text = formatPopulation(population)
 
             // Configuro el adaptador del RecyclerView
             val borderCountriesAdapter = BorderCountriesAdapter(ArrayList())
@@ -100,5 +103,11 @@ class DetailCountryFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    // Función para formatear la población con puntos cada tres dígitos
+    private fun formatPopulation(population: Int): String {
+        val formatter = DecimalFormat("#,###")
+        return formatter.format(population)
     }
 }
